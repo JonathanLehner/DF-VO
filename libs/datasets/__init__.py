@@ -1,6 +1,6 @@
 from .kitti import KittiOdom, KittiRaw
 from .tum import TUM
-from .adelaide import Adelaide
+from .adelaide import Adelaide, _3DPW, EgoBody
 from .kinect import Kinect
 from .oxford_robotcar import OxfordRobotCar
 
@@ -13,5 +13,7 @@ datasets = {
             "adelaide1": Adelaide,
             "adelaide2": Adelaide,
             "kinect": Kinect,
-            'robotcar': OxfordRobotCar
+            'robotcar': OxfordRobotCar,
+            "3dpw": _3DPW,
+            "egobody": EgoBody,
         }

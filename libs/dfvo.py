@@ -65,7 +65,9 @@ class DFVO():
         self.timers = Timer()
 
         # intialize dataset
+        print("J: setup ", self.cfg.dataset)
         self.dataset = Dataset.datasets[self.cfg.dataset](self.cfg)
+        print(self.dataset)
         
         # get tracking method
         self.tracking_method = self.cfg.tracking_method
@@ -290,6 +292,7 @@ class DFVO():
         """load image data and (optional) GT/precomputed depth data
         """
         # Reading image
+        print("J: reading image")
         self.cur_data['img'] = self.dataset.get_image(self.cur_data['timestamp'])
 
         # Reading/Predicting depth
@@ -355,7 +358,12 @@ class DFVO():
         else:
             start_frame = int(input("Start with frame: "))
 
+
+        print("J: len dataset ", len(self.dataset))
+        assert(len(self.dataset) > 0)
+        
         for img_id in tqdm(range(start_frame, len(self.dataset), self.cfg.frame_step)):
+        # for img_id in tqdm(range(start_frame, len(self.dataset), self.cfg.frame_step)):
             self.timers.start('DF-VO')
             self.tracking_mode = "Ess. Mat."
 

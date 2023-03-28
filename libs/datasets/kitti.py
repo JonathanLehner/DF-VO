@@ -99,7 +99,8 @@ class KittiOdom(KITTI):
                             self.cfg.directory.img_seq_dir,
                             self.cfg.seq
                             )
-        data_dir['img'] = os.path.join(img_seq_dir, "image_2")
+        print("J: get_data_dir ", img_seq_dir)
+        data_dir['img'] = os.path.join(img_seq_dir, "image_0") # J: somehow other dataset only preprocesses image_0
 
         # get depth data directory
         data_dir['depth_src'] = self.cfg.depth.depth_src
@@ -126,6 +127,7 @@ class KittiOdom(KITTI):
                             "{}.txt".format(self.cfg.seq)
                             )
         gt_poses = load_poses_from_txt(annotations)
+        print("J: get_gt_poses ", annotations)
         return gt_poses
     
     def get_image(self, timestamp):
@@ -140,6 +142,7 @@ class KittiOdom(KITTI):
         img_path = os.path.join(self.data_dir['img'], 
                             "{:06d}.{}".format(timestamp, self.cfg.image.ext)
                             )
+        print("J: get_image ", img_path)
         img = read_image(img_path, self.cfg.image.height, self.cfg.image.width)
         return img
      
@@ -165,6 +168,7 @@ class KittiOdom(KITTI):
         depth_path = os.path.join(self.data_dir['depth'], img_name)
         depth = read_depth(depth_path, scale_factor, [img_h, img_w])
         return depth
+
 
 class KittiRaw(KITTI):
     """Dataset loader for KITTI Raw dataset
